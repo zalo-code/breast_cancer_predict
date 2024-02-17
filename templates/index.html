@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Predicción de Cáncer de Mama</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Predicción de Cáncer de Mama</h1>
+    <form id="predictionForm">
+        <!-- Parte 1: Primeros 10 campos con valores mínimos y máximos -->
+            <div class="form-group">
+                <label for="mean_radius">Radio medio (6.981 - 28.11):</label>
+                <input type="number" id="mean_radius" name="mean_radius" min="6.981" max="28.11" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="mean_texture">Textura media (9.71 - 39.28):</label>
+                <input type="number" id="mean_texture" name="mean_texture" min="9.71" max="39.28" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="mean_perimeter">Perímetro medio (43.79 - 188.5):</label>
+                <input type="number" id="mean_perimeter" name="mean_perimeter" min="43.79" max="188.5" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="mean_area">Área media (143.5 - 2501):</label>
+                <input type="number" id="mean_area" name="mean_area" min="143.5" max="2501" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="mean_smoothness">Suavidad media (0.05263 - 0.1634):</label>
+                <input type="number" id="mean_smoothness" name="mean_smoothness" min="0.05263" max="0.1634" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="mean_compactness">Compacidad media (0.01938 - 0.3454):</label>
+                <input type="number" id="mean_compactness" name="mean_compactness" min="0.01938" max="0.3454" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="mean_concavity">Concavidad media (0 - 0.4268):</label>
+                <input type="number" id="mean_concavity" name="mean_concavity" min="0" max="0.4268" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="mean_concave_points">Puntos cóncavos medios (0 - 0.2012):</label>
+                <input type="number" id="mean_concave_points" name="mean_concave_points" min="0" max="0.2012" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="mean_symmetry">Simetría media (0.106 - 0.304):</label>
+                <input type="number" id="mean_symmetry" name="mean_symmetry" min="0.106" max="0.304" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="mean_fractal_dimension">Dimensión fractal media (0.04996 - 0.09744):</label>
+                <input type="number" id="mean_fractal_dimension" name="mean_fractal_dimension" min="0.04996" max="0.09744" step="any" required>
+            </div>
+            <!-- Parte 2: Siguientes 10 campos con valores mínimos y máximos -->
+            <div class="form-group">
+                <label for="radius_se">Error estándar del radio (0.1115 - 2.873):</label>
+                <input type="number" id="radius_se" name="radius_se" min="0.1115" max="2.873" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="texture_se">Error estándar de la textura (0.3602 - 4.885):</label>
+                <input type="number" id="texture_se" name="texture_se" min="0.3602" max="4.885" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="perimeter_se">Error estándar del perímetro (0.757 - 21.98):</label>
+                <input type="number" id="perimeter_se" name="perimeter_se" min="0.757" max="21.98" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="area_se">Error estándar del área (6.802 - 542.2):</label>
+                <input type="number" id="area_se" name="area_se" min="6.802" max="542.2" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="smoothness_se">Error estándar de la suavidad (0.001713 - 0.03113):</label>
+                <input type="number" id="smoothness_se" name="smoothness_se" min="0.001713" max="0.03113" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="compactness_se">Error estándar de la compactación (0.002252 - 0.1354):</label>
+                <input type="number" id="compactness_se" name="compactness_se" min="0.002252" max="0.1354" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="concavity_se">Error estándar de la concavidad (0 - 0.396):</label>
+                <input type="number" id="concavity_se" name="concavity_se" min="0" max="0.396" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="concave_points_se">Error estándar de los puntos cóncavos (0 - 0.05279):</label>
+                <input type="number" id="concave_points_se" name="concave_points_se" min="0" max="0.05279" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="symmetry_se">Error estándar de la simetría (0.007882 - 0.07895):</label>
+                <input type="number" id="symmetry_se" name="symmetry_se" min="0.007882" max="0.07895" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="fractal_dimension_se">Error estándar de la dimensión fractal (0.000895 - 0.02984):</label>
+                <input type="number" id="fractal_dimension_se" name="fractal_dimension_se" min="0.000895" max="0.02984" step="any" required>
+            </div>
+            <!-- Parte 3: Últimos 10 campos con valores mínimos y máximos -->
+            <div class="form-group">
+                <label for="worst_radius">Radio peor (7.93 - 36.04):</label>
+                <input type="number" id="worst_radius" name="worst_radius" min="7.93" max="36.04" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="worst_texture">Textura peor (12.02 - 49.54):</label>
+                <input type="number" id="worst_texture" name="worst_texture" min="12.02" max="49.54" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="worst_perimeter">Perímetro peor (50.41 - 251.2):</label>
+                <input type="number" id="worst_perimeter" name="worst_perimeter" min="50.41" max="251.2" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="worst_area">Área peor (185.2 - 4254):</label>
+                <input type="number" id="worst_area" name="worst_area" min="185.2" max="4254" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="worst_smoothness">Suavidad peor (0.07117 - 0.2226):</label>
+                <input type="number" id="worst_smoothness" name="worst_smoothness" min="0.07117" max="0.2226" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="worst_compactness">Compactación peor (0.02729 - 1.058):</label>
+                <input type="number" id="worst_compactness" name="worst_compactness" min="0.02729" max="1.058" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="worst_concavity">Concavidad peor (0 - 1.252):</label>
+                <input type="number" id="worst_concavity" name="worst_concavity" min="0" max="1.252" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="worst_concave_points">Puntos cóncavos peores (0 - 0.291):</label>
+                <input type="number" id="worst_concave_points" name="worst_concave_points" min="0" max="0.291" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="worst_symmetry">Simetría peor (0.1565 - 0.6638):</label>
+                <input type="number" id="worst_symmetry" name="worst_symmetry" min="0.1565" max="0.6638" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="worst_fractal_dimension">Dimensión fractal peor (0.05504 - 0.2075):</label>
+                <input type="number" id="worst_fractal_dimension" name="worst_fractal_dimension" min="0.05504" max="0.2075" step="any" required>
+            </div>
+
+
+
+        <!-- Añade más campos según las características que tu modelo necesite -->
+        <button type="submit">Predecir</button>
+    </form>
+    <div id="predictionResult"></div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
